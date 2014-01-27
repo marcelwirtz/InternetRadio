@@ -1,0 +1,13 @@
+﻿<Window x:Class="InternetRadio.Info"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Info" Height="146" Width="234" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="16*" />
+            <ColumnDefinition Width="262*" />
+        </Grid.ColumnDefinitions>
+        <Label Content="Internet Radio v0.5" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label1" VerticalAlignment="Top" IsEnabled="True" FontWeight="Bold" Width="176" Grid.ColumnSpan="2" FontSize="17" />
+        <TextBlock Height="58" HorizontalAlignment="Left" Margin="2,46,0,0" Name="textBlock1" Text="Entworfen und programmiert von Eric Lambrecht." VerticalAlignment="Top" Width="186" TextWrapping="Wrap" Grid.Column="1" FontSize="15" FontWeight="Thin" />
+    </Grid>
+</Window>
