@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.IO;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Data;
 using System.Data.Common;
+using System.Windows;
 
 
 namespace InternetRadio
@@ -18,7 +20,8 @@ namespace InternetRadio
         public PlayerState State { get; set; }
         private Dictionary<string, string> _playlist = new Dictionary<string, string>();
         private static Player _instance;
-        public event EventHandler Changed;
+        public event EventHandler StateChanged;
+        public event EventHandler<SongEventArgs> SongChanged;
  
         public Dictionary<string, string> Playlist
         {
@@ -37,7 +40,7 @@ namespace InternetRadio
             set
             {
                 _player.Volume = value;
-                OnChanged();
+                RaiseStateChanged();
             }
         }
  
@@ -60,6 +63,7 @@ namespace InternetRadio
             _player = new MediaElement();
             _player.LoadedBehavior = MediaState.Manual;
             _player.UnloadedBehavior = MediaState.Manual;
+            _player.ScriptCommand += new EventHandler<MediaScriptCommandRoutedEventArgs>(RaiseSongChanged);
         }
  
         public void SetSource(int index, string uri)
@@ -67,28 +71,33 @@ namespace InternetRadio
             SelectedIndex = index;
             _player.Source = new Uri(uri);
             State = PlayerState.Stopped;
-            OnChanged();
+            RaiseStateChanged();
+        }
+
+        public string GetCurrentTitle(string uri)
+        {
+            return "not implemented yet";
         }
  
         public void Play()
         {
             _player.Play();
             State = PlayerState.Playing;
-            OnChanged();
+            RaiseStateChanged();
         }
  
         public void Stop()
         {
             _player.Stop();
             State = PlayerState.Stopped;
-            OnChanged();
+            RaiseStateChanged();
         }
  
         public void Pause()
         {
             _player.Pause();
             State = PlayerState.Paused;
-            OnChanged();
+            RaiseStateChanged();
         }
  
         public void Unload()
@@ -115,14 +124,30 @@ namespace InternetRadio
                     plus = "";
                 _playlist.Add( plus+line[0].ToString().Trim(), line[1].ToString().Trim() );
             }
-            OnChanged();
+            RaiseStateChanged();
         }
  
-        private void OnChanged()
+        private void RaiseStateChanged()
         {
-            if (Changed != null)
+            if (StateChanged != null)
             {
-                Changed(this, null);
+                // Raise Event
+                StateChanged(this, null);
+            }
+        }
+
+        protected virtual void RaiseSongChanged(object Sender, MediaScriptCommandRoutedEventArgs eArgs)
+        {
+
+            SongEventArgs e = new SongEventArgs((string)eArgs.OriginalSource, eArgs.ParameterType, eArgs.ParameterValue);
+
+            // Temporary copy, to prevent a race condition
+            EventHandler<SongEventArgs> eventHandler = SongChanged;
+
+            if (eventHandler != null)
+            {
+                // Raise Event
+                eventHandler(this, e);
             }
         }
     }
@@ -133,5 +158,19 @@ namespace InternetRadio
         Stopped,
         Paused,
         Playing
+    }
+
+    public class SongEventArgs : EventArgs
+    {
+        public string title  { get; set; }
+        public string artist { get; set; }
+        public string album  {get; set; }        
+
+        public SongEventArgs(string title, string artist, string album)
+        {
+            this.title  = title;
+            this.artist = artist;
+            this.album  = album;
+        }
     }
 }

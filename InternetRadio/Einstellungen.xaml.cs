@@ -9,7 +9,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.IO;
 using System.Data;
 using System.Data.Common;
 
@@ -26,9 +26,10 @@ namespace InternetRadio
         public Einstellungen()
         {
             InitializeComponent();
-            csv = new CSVManager();
+            string appPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Simple Radio");
+            csv = new CSVManager(appPath, "radiolist.csv");
             table = new DataTable("Inhalt");
-            table = csv.GetTableFromFile(); //aus radioList.csv
+            table = csv.GetTableFromFile(); //aus radiolist.csv
 
             dataGrid1.ItemsSource = table.AsDataView();
         }

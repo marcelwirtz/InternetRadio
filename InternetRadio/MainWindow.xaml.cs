@@ -10,7 +10,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -28,14 +27,16 @@ namespace InternetRadio
         private Einstellungen _settings;
         private Hilfe _help;
         private Info _about;
-        private CSVManager csv;
+        private CSVManager csvFile;
         private DataTable table;
 
         public MainWindow()
         {
             _radio = Player.Instance;
-            _radio.Changed += new EventHandler(_radio_Changed);
-            csv = new CSVManager();
+            _radio.StateChanged += new EventHandler(_radio_Changed);
+            _radio.SongChanged += new EventHandler<SongEventArgs>(_radio_SongChanged);
+            string appPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Simple Radio");
+            csvFile = new CSVManager(appPath, "radiolist.csv");
             InitializeComponent();
             PlaylistLaden();
             Update();
@@ -44,6 +45,7 @@ namespace InternetRadio
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            // scheint nicht ausgelöst zu werden
         }
 
 
@@ -113,19 +115,17 @@ namespace InternetRadio
         private void stop_Click(object sender, RoutedEventArgs e)
         {
             _radio.Stop();
-            UpdateButton();
         }
 
         private void laden_Click(object sender, RoutedEventArgs e)
         {
             PlaylistLaden();
-            Update();
         }
 
         private void PlaylistLaden()
         {
             _radio.Unload();
-            table = csv.GetTableFromFile();
+            table = csvFile.GetTableFromFile();
             try
             {
                 _radio.LoadPlaylist(table);            
@@ -152,14 +152,17 @@ namespace InternetRadio
             {
                 if (senderListe.SelectedValue != null)
                 {
+                    // Ein neuer Sender wurde ausgewählt
                     if (senderListe.SelectedIndex != _radio.SelectedIndex)
                     {
                         _radio.SetSource(senderListe.SelectedIndex,
                             senderListe.SelectedValue.ToString());
 
                         _radio.Play();
-                        UpdateButton();                  
+                        UpdateButton();
+                        //MessageBox.Show(_radio.GetCurrentTitle(senderListe.SelectedValue.ToString()));
                     }
+                    // Kein neuer Sender ausgewählt
                     else
                     {
                         _radio.SetSource(senderListe.SelectedIndex,
@@ -186,7 +189,7 @@ namespace InternetRadio
         {
             _settings = new Einstellungen();
             _settings.Owner = this;
-            _settings.ShowDialog(); // Code "stoppt" das Window geschlossen wird.
+            _settings.ShowDialog(); // Code "stoppt" bis das Window geschlossen wird.
             _settings.SaveData();   // Änderungen werden gespeichert.
             Update();
         }
@@ -203,6 +206,12 @@ namespace InternetRadio
             _help = new Hilfe();
             _help.Owner = this;
             _help.ShowDialog();
+        }
+
+        void _radio_SongChanged(object sender, SongEventArgs e)
+        {
+            // Radio hat neue Meta Daten empfangen
+            MessageBox.Show(e.title + e.album + e.artist);
         }
     }
 }

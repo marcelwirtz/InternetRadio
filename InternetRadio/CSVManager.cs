@@ -15,13 +15,20 @@ namespace InternetRadio
 
     class CSVManager
     {
-        private string appPath;
+        private string path;
         private string fileName;
 
-        public CSVManager()
+        public CSVManager(string directoryPath, string fileName)
         {
-            appPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Simple Radio");
-            fileName = "radiolist.csv";
+            this.path     = directoryPath;
+            this.fileName = fileName;
+        }
+
+        public CSVManager(string appName)
+        {
+            // Saves .csv-File to default location in %APPDATA%/"appName"/"appName.csv"
+            this.path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), appName);
+            this.fileName = appName + ".csv";
         }
 
         //<summary>
@@ -34,16 +41,16 @@ namespace InternetRadio
             //
             // Adding the main-columns: Name | Source (URL/path) | Favourite?
             //
-            table.Columns.Add("Name", typeof(string));
+            table.Columns.Add("Name",   typeof(string));
             table.Columns.Add("Source", typeof(string));
-            table.Columns.Add("Fav", typeof(bool));
+            table.Columns.Add("Fav",    typeof(bool));
 
             //
             // Read .csv-File to complete the output-table
             //   
             try
             {
-                StreamReader reader = new StreamReader(@Path.Combine(appPath, fileName));
+                StreamReader reader = new StreamReader(@Path.Combine(path, fileName));
 
                 List<string[]> content = new List<string[]>(); // Container for all rows
 
@@ -69,11 +76,11 @@ namespace InternetRadio
             }
             catch (DirectoryNotFoundException dirErr)
             {
-                Directory.CreateDirectory(appPath);
+                Directory.CreateDirectory(path);
             }
             catch (FileNotFoundException fileErr)
             {
-                File.Create(Path.Combine(appPath, fileName));
+                File.Create(Path.Combine(path, fileName));
                 MessageBox.Show("Installiert!");
             }
             catch (IOException ioErr)
@@ -89,7 +96,7 @@ namespace InternetRadio
         //</summary>
         public void SaveFileFromTable(DataTable table) 
         {
-            StreamWriter writer = new StreamWriter(@Path.Combine(appPath, fileName));
+            StreamWriter writer = new StreamWriter(@Path.Combine(path, fileName));
 
             foreach (DataRow row in table.Rows)
             {
