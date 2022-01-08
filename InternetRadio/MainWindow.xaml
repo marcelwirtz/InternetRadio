@@ -1,54 +1,52 @@
 ﻿<Window x:Class="InternetRadio.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Erics Internet Radio" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="211" Width="507" Opacity="1" AllowsTransparency="False" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize" FontStyle="Normal" Background="White" Icon="/InternetRadio;component/Resources/Speaker.ico">
-    
-    <Grid Name="InternetRadio" Height="243" VerticalAlignment="Stretch" Width="522">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="243*" />
-            <ColumnDefinition Width="178*" />
-            <ColumnDefinition Width="64*" />
-        </Grid.ColumnDefinitions>
-        <Menu IsMainMenu="True" Margin="0,0,0,221" Grid.ColumnSpan="3" BorderBrush="{StaticResource {x:Static SystemColors.ControlBrushKey}}" BorderThickness="1" ClipToBounds="True" OverridesDefaultStyle="False">
-            <MenuItem Header="_Datei">
-                <MenuItem Header="Neu laden..." Click="laden_Click">
-                    <MenuItem.Icon>
-                        <Image Source="/InternetRadio;component/Resources/refresh_icon16.png"/>
-                    </MenuItem.Icon>
+        Title="Internet Radio" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Opacity="1" AllowsTransparency="False" WindowStyle="SingleBorderWindow" ResizeMode="CanMinimize" FontStyle="Normal" Background="White" Icon="/InternetRadio;component/Resources/Speaker.ico" Height="100" Width="491.65">
+
+    <DockPanel Margin="0">
+        <StackPanel x:Name="InternetRadio" Margin="0" DockPanel.Dock="Top">
+            <Menu IsMainMenu="True" BorderBrush="{StaticResource {x:Static SystemColors.ControlBrushKey}}" BorderThickness="1" ClipToBounds="True" OverridesDefaultStyle="False" Margin="0">
+                <MenuItem Header="_Datei">
+                    <MenuItem Header="Neu laden..." Click="laden_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/InternetRadio;component/Resources/refresh_icon16.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Einstellungen" Click="showSettings">
+                        <MenuItem.Icon>
+                            <Image Source="/InternetRadio;component/Resources/wrench_plus_2_icon16.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="_Beenden" Click="quit_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/InternetRadio;component/Resources/app_window_cross_icon16.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
-                <MenuItem Header="Einstellungen" Click="showSettings">
-                    <MenuItem.Icon>
-                        <Image Source="/InternetRadio;component/Resources/wrench_plus_2_icon16.png"/>
-                    </MenuItem.Icon>
+                <MenuItem Header="_Hilfe">
+                    <MenuItem Header="Hilfe anzeigen" Click="showHelp">
+                        <MenuItem.Icon>
+                            <Image Source="/InternetRadio;component/Resources/book_icon16.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
-                <Separator/>
-                <MenuItem Header="_Beenden" Click="quit_Click">
-                    <MenuItem.Icon>
-                        <Image Source="/InternetRadio;component/Resources/app_window_cross_icon16.png" />
-                    </MenuItem.Icon>
+                <MenuItem Header="_?">
+                    <MenuItem Header="Info" Click="showInfo">
+                        <MenuItem.Icon>
+                            <Image Source="/InternetRadio;component/Resources/info_icon16.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
-            </MenuItem>
-            <MenuItem Header="_Hilfe">
-                <MenuItem Header="Hilfe anzeigen" Click="showHelp">
-                    <MenuItem.Icon>
-                        <Image Source="/InternetRadio;component/Resources/book_icon16.png" />
-                    </MenuItem.Icon>
-                </MenuItem>
-            </MenuItem>
-            <MenuItem Header="_?">
-                <MenuItem Header="Info" Click="showInfo">
-                    <MenuItem.Icon>
-                        <Image Source="/InternetRadio;component/Resources/info_icon16.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-            </MenuItem>
-        </Menu>
-        <Label Content="Simple Radio" Height="61" HorizontalAlignment="Left" Margin="15,30,0,0" Name="label1" VerticalAlignment="Top" FontSize="38" Width="289" FontWeight="Normal" FontFamily="Cubano" Grid.ColumnSpan="2" />
-        <ComboBox Height="30" HorizontalAlignment="Left" Margin="20,91,0,0" Name="senderListe" VerticalAlignment="Top" Width="214" SelectionChanged="senderListe_SelectionChanged" FontSize="16" />
-        <Button Content="Play" HorizontalAlignment="Left" Margin="240,91,0,0" Name="play" Width="38" Click="play_Click" Height="30" VerticalAlignment="Top" Grid.ColumnSpan="2" />
-        <Button Content="Stop" Height="30" HorizontalAlignment="Left" Margin="23,91,0,0" Name="stop" VerticalAlignment="Top" Width="41" Click="stop_Click" Grid.Column="1" />
-        <Image Height="26" HorizontalAlignment="Left" Margin="71,95,0,0" Name="image1" Stretch="None" VerticalAlignment="Top" Width="26" Source="/InternetRadio;component/Resources/sound_zero_icon24.png" Grid.Column="1" />
-        <Slider Margin="100,97,0,0" Name="slider1" ValueChanged="slider1_ValueChanged" HorizontalAlignment="Left" Width="91" Height="23" VerticalAlignment="Top" Maximum="1" LargeChange="0.5" Grid.Column="1" />
-        <Image Height="26" HorizontalAlignment="Left" Margin="0,95,0,0" Name="image2" Source="/InternetRadio;component/Resources/sound_high_icon24.png" Stretch="None" VerticalAlignment="Top" Width="26" Grid.Column="2" />
-    </Grid>
+            </Menu>
+            <DockPanel Margin="5,5,5,0">
+                <ComboBox Height="30" HorizontalAlignment="Left" x:Name="senderListe" VerticalAlignment="Top" Width="214" SelectionChanged="senderListe_SelectionChanged" FontSize="16" Margin="0,0,5,0" />
+                <Button Content="Play" HorizontalAlignment="Left" x:Name="play" Width="38" Click="play_Click" Height="30" VerticalAlignment="Top" Margin="0,0,5,0" />
+                <Button Content="Stop" Height="30" HorizontalAlignment="Left" x:Name="stop" VerticalAlignment="Top" Width="41" Click="stop_Click" Margin="0,0,5,0" />
+                <Image Height="26" HorizontalAlignment="Left" x:Name="image1" Stretch="None" VerticalAlignment="Top" Width="26" Source="/InternetRadio;component/Resources/sound_zero_icon24.png" Margin="0" />
+                <Slider x:Name="slider1" ValueChanged="slider1_ValueChanged" HorizontalAlignment="Left" Width="91" Height="23" VerticalAlignment="Top" Maximum="1" LargeChange="0.2" Value="0.8" Margin="0,4,5,0" />
+                <Image Height="26" HorizontalAlignment="Left" x:Name="image2" Source="/InternetRadio;component/Resources/sound_high_icon24.png" Stretch="None" VerticalAlignment="Top" Width="26" Margin="0,0,5,0" />
+            </DockPanel>
+        </StackPanel>
+    </DockPanel>
 </Window>

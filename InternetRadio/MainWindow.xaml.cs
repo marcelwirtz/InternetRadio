@@ -15,6 +15,8 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Data;
 using System.Data.Sql;
+using System.Timers;
+using System.Windows.Threading;
 
 namespace InternetRadio
 {
@@ -29,18 +31,24 @@ namespace InternetRadio
         private Info _about;
         private CSVManager csvFile;
         private DataTable table;
+        private Timer reconnectTimer;
 
         public MainWindow()
         {
+            reconnectTimer = new Timer();
+            reconnectTimer.Interval = 5000;
+            reconnectTimer.Elapsed += tryReconnect;
             _radio = Player.Instance;
+            _radio.Volume = 0.8;
             _radio.StateChanged += new EventHandler(_radio_Changed);
             _radio.SongChanged += new EventHandler<SongEventArgs>(_radio_SongChanged);
-            string appPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Simple Radio");
+            string appPath = AppDomain.CurrentDomain.BaseDirectory;
             csvFile = new CSVManager(appPath, "radiolist.csv");
             InitializeComponent();
             PlaylistLaden();
             Update();
             NewSelection();
+
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
@@ -52,6 +60,8 @@ namespace InternetRadio
         void _radio_Changed(object sender, EventArgs e)
         {
             Update();
+            if (_radio.State == PlayerState.Failed) reconnectTimer.Enabled = true;
+            else reconnectTimer.Enabled = false;
         }
 
         private void play_Click(object sender, RoutedEventArgs e)
@@ -106,6 +116,11 @@ namespace InternetRadio
                     play.IsEnabled = true;
                     stop.IsEnabled = true;
                     play.Content = "Play";
+                    break;
+                case PlayerState.Failed:
+                    play.IsEnabled = false;
+                    stop.IsEnabled = true;
+                    play.Content = "Pause";
                     break;
                 case PlayerState.Unknown:
                     break;
@@ -165,10 +180,9 @@ namespace InternetRadio
                     // Kein neuer Sender ausgewählt
                     else
                     {
+                        _radio.Stop();
                         _radio.SetSource(senderListe.SelectedIndex,
                             senderListe.SelectedValue.ToString());
-
-                        _radio.Stop();
                         UpdateButton();
                     }
                 }
@@ -187,7 +201,7 @@ namespace InternetRadio
 
         private void showSettings(object sender, RoutedEventArgs e)
         {
-            _settings = new Einstellungen();
+            _settings = new Einstellungen(ref csvFile);
             _settings.Owner = this;
             _settings.ShowDialog(); // Code "stoppt" bis das Window geschlossen wird.
             _settings.SaveData();   // Änderungen werden gespeichert.
@@ -212,6 +226,15 @@ namespace InternetRadio
         {
             // Radio hat neue Meta Daten empfangen
             MessageBox.Show(e.title + e.album + e.artist);
+        }
+
+        private void tryReconnect(object sender, ElapsedEventArgs e)
+        {
+            this.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
+            {
+                NewSelection();
+                _radio.Play();
+            }));
         }
     }
 }

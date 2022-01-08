@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Controls;
-using System.IO;
-using System.Net;
-using System.Text.RegularExpressions;
 using System.Data;
-using System.Data.Common;
 using System.Windows;
 
 
@@ -60,10 +54,16 @@ namespace InternetRadio
  
         private Player()
         {
+            InitNewPlayer();
+        }
+
+        private void InitNewPlayer()
+        {
             _player = new MediaElement();
             _player.LoadedBehavior = MediaState.Manual;
             _player.UnloadedBehavior = MediaState.Manual;
             _player.ScriptCommand += new EventHandler<MediaScriptCommandRoutedEventArgs>(RaiseSongChanged);
+            _player.MediaFailed += MediaFailed;
         }
  
         public void SetSource(int index, string uri)
@@ -81,6 +81,7 @@ namespace InternetRadio
  
         public void Play()
         {
+            _player.Position = TimeSpan.FromMilliseconds(1);
             _player.Play();
             State = PlayerState.Playing;
             RaiseStateChanged();
@@ -136,6 +137,15 @@ namespace InternetRadio
             }
         }
 
+        private void MediaFailed(object sender, ExceptionRoutedEventArgs eArgs)
+        {
+            State = PlayerState.Failed;
+            _player.Source = null;
+            //InitNewPlayer();
+            Console.WriteLine(eArgs.ErrorException.Message);
+            RaiseStateChanged();
+        }
+
         protected virtual void RaiseSongChanged(object Sender, MediaScriptCommandRoutedEventArgs eArgs)
         {
 
@@ -157,7 +167,8 @@ namespace InternetRadio
         Unknown,
         Stopped,
         Paused,
-        Playing
+        Playing,
+        Failed
     }
 
     public class SongEventArgs : EventArgs

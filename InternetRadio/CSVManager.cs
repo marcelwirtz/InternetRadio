@@ -13,7 +13,7 @@ namespace InternetRadio
     // .csv Files have to be seperated by commas (',')!
     // Format: "Name,Source,Fav"
 
-    class CSVManager
+    public class CSVManager
     {
         private string path;
         private string fileName;
@@ -100,6 +100,7 @@ namespace InternetRadio
 
             foreach (DataRow row in table.Rows)
             {
+                if (row[2] is System.DBNull) row[2] = false;
                 writer.WriteLine("{0},{1},{2}", row[0], row[1], row[2].ToString() );
             }
             writer.Close();
