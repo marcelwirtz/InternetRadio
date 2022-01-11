@@ -1,0 +1,35 @@
+﻿<Window x:Class="InternetRadio.Core.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InternetRadio.Core"
+        mc:Ignorable="d"
+        Title="InternetRadio .NET Core 5.0" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <MediaElement
+            Grid.Row="0"
+    x:Name="Player" />
+        <Button
+            Grid.Row="1"
+            MinHeight="48"
+            MinWidth="120"
+            Click="ButtonPlay_Click"
+            CommandParameter="http://f121.rndfnk.com/ard/wdr/wdr2/ruhrgebiet/mp3/128/stream.mp3?sid=23Z0wY47oF8hORZdsB0UmK4LpvD&amp;token=KUVrBgGUy3s2hZbnmellq1IsTH2ntDS1cQqx9GX8XAA&amp;tvf=Y8P2ZiJfyRZmMTIxLnJuZGZuay5jb20"
+            Content="Play HTTP"
+            />
+        <Button
+            Grid.Row="2"
+            MinHeight="48"
+            MinWidth="120"
+            Click="ButtonPlay_Click"
+            CommandParameter="https://d111.rndfnk.com/ard/swr/swr3/live/mp3/128/stream.mp3?aggregator=web&amp;sid=23Z0z3SG4a5H50EauA99PgFHodV&amp;token=kOobYcOaJGxSrOP7EHLzrrWw1fb0-5OI9sneQUuFf6Q&amp;tvf=lnPQ9iZfyRZkMTExLnJuZGZuay5jb20"
+            Content="Play HTTPS"
+            />
+    </Grid>
+</Window>

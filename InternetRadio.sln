@@ -1,20 +1,49 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetRadio", "InternetRadio\InternetRadio.csproj", "{E783A0FF-0AA3-4BE6-B7A8-04FFA611495D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetRadio.Core", "InternetRadio.Core\InternetRadio.Core.csproj", "{184D189D-0FC9-474F-AF5D-05629E0F9166}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetRadio.Net48", "InternetRadio.Net48\InternetRadio.Net48.csproj", "{64A8A576-40FB-4810-8304-B3A64BBD445F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E783A0FF-0AA3-4BE6-B7A8-04FFA611495D}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{E783A0FF-0AA3-4BE6-B7A8-04FFA611495D}.Debug|x86.ActiveCfg = Debug|x86
 		{E783A0FF-0AA3-4BE6-B7A8-04FFA611495D}.Debug|x86.Build.0 = Debug|x86
+		{E783A0FF-0AA3-4BE6-B7A8-04FFA611495D}.Release|Any CPU.ActiveCfg = Release|x86
 		{E783A0FF-0AA3-4BE6-B7A8-04FFA611495D}.Release|x86.ActiveCfg = Release|x86
 		{E783A0FF-0AA3-4BE6-B7A8-04FFA611495D}.Release|x86.Build.0 = Release|x86
+		{184D189D-0FC9-474F-AF5D-05629E0F9166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{184D189D-0FC9-474F-AF5D-05629E0F9166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{184D189D-0FC9-474F-AF5D-05629E0F9166}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{184D189D-0FC9-474F-AF5D-05629E0F9166}.Debug|x86.Build.0 = Debug|Any CPU
+		{184D189D-0FC9-474F-AF5D-05629E0F9166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{184D189D-0FC9-474F-AF5D-05629E0F9166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{184D189D-0FC9-474F-AF5D-05629E0F9166}.Release|x86.ActiveCfg = Release|Any CPU
+		{184D189D-0FC9-474F-AF5D-05629E0F9166}.Release|x86.Build.0 = Release|Any CPU
+		{64A8A576-40FB-4810-8304-B3A64BBD445F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64A8A576-40FB-4810-8304-B3A64BBD445F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64A8A576-40FB-4810-8304-B3A64BBD445F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{64A8A576-40FB-4810-8304-B3A64BBD445F}.Debug|x86.Build.0 = Debug|Any CPU
+		{64A8A576-40FB-4810-8304-B3A64BBD445F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64A8A576-40FB-4810-8304-B3A64BBD445F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64A8A576-40FB-4810-8304-B3A64BBD445F}.Release|x86.ActiveCfg = Release|Any CPU
+		{64A8A576-40FB-4810-8304-B3A64BBD445F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C0EBC0E1-EA7D-4154-B183-874C3D990222}
 	EndGlobalSection
 EndGlobal
