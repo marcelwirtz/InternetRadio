@@ -6,4 +6,108 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\app_window_cross_icon16.png" />
+    <None Remove="Resources\back.ico" />
+    <None Remove="Resources\blog.ico" />
+    <None Remove="Resources\book_icon16.png" />
+    <None Remove="Resources\configuration2.ico" />
+    <None Remove="Resources\delete_icon24.png" />
+    <None Remove="Resources\flag.ico" />
+    <None Remove="Resources\folder.ico" />
+    <None Remove="Resources\Info.ico" />
+    <None Remove="Resources\info_icon16.png" />
+    <None Remove="Resources\light.ico" />
+    <None Remove="Resources\message_attention_icon48.png" />
+    <None Remove="Resources\playback_play_icon48.png" />
+    <None Remove="Resources\playback_stop_icon48.png" />
+    <None Remove="Resources\refresh_icon16.png" />
+    <None Remove="Resources\refresh_icon32.png" />
+    <None Remove="Resources\sound_high_icon24.png" />
+    <None Remove="Resources\sound_mute_icon24.png" />
+    <None Remove="Resources\sound_zero_icon24.png" />
+    <None Remove="Resources\Speaker.png" />
+    <None Remove="Resources\tag.ico" />
+    <None Remove="Resources\wrench_plus_2_icon16.png" />
+    <None Remove="Speaker.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\back.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\app_window_cross_icon16.png" />
+    <Content Include="Resources\blog.ico" />
+    <Content Include="Resources\book_icon16.png" />
+    <Content Include="Resources\configuration2.ico" />
+    <Content Include="Resources\delete_icon24.png" />
+    <Content Include="Resources\flag.ico" />
+    <Content Include="Resources\folder.ico">
+      <CustomToolNamespace>InternetRadio</CustomToolNamespace>
+    </Content>
+    <Content Include="Resources\Info.ico" />
+    <Content Include="Resources\info_icon16.png" />
+    <Content Include="Resources\light.ico" />
+    <Content Include="Resources\message_attention_icon48.png" />
+    <Content Include="Resources\playback_play_icon48.png" />
+    <Content Include="Resources\playback_stop_icon48.png" />
+    <Content Include="Resources\refresh_icon16.png" />
+    <Content Include="Resources\refresh_icon32.png" />
+    <Content Include="Resources\sound_high_icon24.png" />
+    <Content Include="Resources\sound_mute_icon24.png" />
+    <Content Include="Resources\sound_zero_icon24.png" />
+    <Content Include="Resources\Speaker.png" />
+    <Content Include="Resources\tag.ico" />
+    <Content Include="Resources\wrench_plus_2_icon16.png" />
+    <PackageReference Include="taglib-sharp-netstandard2.0" Version="2.1.0" />
+    <Resource Include="Speaker.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="App.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Einstellungen.xaml.cs">
+      <DependentUpon>Einstellungen.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Hilfe.xaml.cs">
+      <DependentUpon>Hilfe.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Info.xaml.cs">
+      <DependentUpon>Info.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Einstellungen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Hilfe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Info.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
 </Project>
