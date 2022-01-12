@@ -1,0 +1,23 @@
+﻿<Window x:Class="InternetRadio.Einstellungen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Einstellungen" Height="341" Width="396" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Grid ClipToBounds="False">
+        <DataGrid x:Name="dataGrid1"  AutoGenerateColumns="False" Height="151" HorizontalAlignment="Left" Margin="18,46,0,0"
+                  VerticalAlignment="Top" Width="339" CanUserResizeColumns="False" ItemsSource="{Binding}" FontSize="13" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFBEBEBE">
+            <DataGrid.Columns>
+            <DataGridTextColumn Header="Name"  x:Name="name" Binding="{Binding Path=Name}" Width="0.30*" />
+            <DataGridTextColumn Header="URL/Pfad" x:Name="source" Binding="{Binding Path=Source}" Width="0.50*" />
+            <DataGridCheckBoxColumn Header="Favorit?" x:Name="fav" Binding="{Binding Path=Fav}" Width="0.20*" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button HorizontalAlignment="Left" Margin="287,199,0,0" Name="button2" Width="70" Height="25" VerticalAlignment="Top" FontSize="12" FontWeight="Medium">
+            <Button.Content>Entfernen</Button.Content>
+            <!--<Image Source="/InternetRadio;component/Resources/delete_icon24.png" />-->
+        </Button>
+        <Label Content="Senderliste (/Playlists):" Height="40" HorizontalAlignment="Left" Margin="14,8,0,0" Name="label1" VerticalAlignment="Top" FontSize="16.7" FontWeight="Bold" FontStretch="Normal" />
+        <Label Content="Änderungen werden automatisch gespeichert." Height="32" Margin="14,192,89,0" Name="label2" VerticalAlignment="Top" Foreground="DimGray" FontStyle="Italic" FontSize="12.8" FontWeight="Normal" />
+        <CheckBox Content="zuletzt gespielten Sender merken" Height="24" HorizontalAlignment="Left" Margin="18,237,0,0" Name="checkBox1" VerticalAlignment="Top" FontSize="14.5" FontWeight="Thin" />
+        <CheckBox Content="letzte Lautstärke merken" Height="21" HorizontalAlignment="Left" Margin="18,267,0,0" Name="checkBox2" VerticalAlignment="Top" IsChecked="True" FontSize="14.5" FontWeight="Thin" />
+    </Grid>
+</Window>

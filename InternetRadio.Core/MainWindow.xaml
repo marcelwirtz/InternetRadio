@@ -1,0 +1,62 @@
+﻿<Window x:Class="InternetRadio.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        mc:Ignorable="d"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Opacity="1"
+        AllowsTransparency="False"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="CanMinimize"
+        FontStyle="Normal"
+        Background="White"
+        Title="Internet Radio"
+        Height="100" Width="491.65">
+
+    <DockPanel Margin="0">
+        <StackPanel x:Name="InternetRadio" Margin="0" DockPanel.Dock="Top">
+            <Menu IsMainMenu="True" BorderBrush="{StaticResource {x:Static SystemColors.ControlBrushKey}}" BorderThickness="1" ClipToBounds="True" OverridesDefaultStyle="False" Margin="0">
+                <MenuItem Header="_Datei">
+                    <MenuItem Header="Neu laden..." Click="laden_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/refresh_icon16.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Einstellungen" Click="showSettings">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/wrench_plus_2_icon16.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="_Beenden" Click="quit_Click">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/app_window_cross_icon16.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Hilfe">
+                    <MenuItem Header="Hilfe anzeigen" Click="showHelp">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/book_icon16.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="_?">
+                    <MenuItem Header="Info" Click="showInfo">
+                        <MenuItem.Icon>
+                            <Image Source="/Resources/info_icon16.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+            <DockPanel Margin="5,5,5,0">
+                <ComboBox Height="30" HorizontalAlignment="Left" x:Name="senderListe" VerticalAlignment="Top" Width="214" SelectionChanged="senderListe_SelectionChanged" FontSize="16" Margin="0,0,5,0" />
+                <Button Content="Play" HorizontalAlignment="Left" x:Name="play" Width="38" Click="play_Click" Height="30" VerticalAlignment="Top" Margin="0,0,5,0" />
+                <Button Content="Stop" Height="30" HorizontalAlignment="Left" x:Name="stop" VerticalAlignment="Top" Width="41" Click="stop_Click" Margin="0,0,5,0" />
+                <Image Height="26" HorizontalAlignment="Left" x:Name="image1" Stretch="None" VerticalAlignment="Top" Width="26" Source="/Resources/sound_zero_icon24.png" Margin="0" />
+                <Slider x:Name="slider1" ValueChanged="slider1_ValueChanged" HorizontalAlignment="Left" Width="91" Height="23" VerticalAlignment="Top" Maximum="1" LargeChange="0.2" Value="0.8" Margin="0,4,5,0" />
+                <Image Height="26" HorizontalAlignment="Left" x:Name="image2" Source="/Resources/sound_high_icon24.png" Stretch="None" VerticalAlignment="Top" Width="26" Margin="0,0,5,0" />
+            </DockPanel>
+        </StackPanel>
+    </DockPanel>
+</Window>
