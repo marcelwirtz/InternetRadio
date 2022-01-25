@@ -11,7 +11,7 @@
         FontStyle="Normal"
         Background="White"
         Title="Internet Radio"
-        Height="100" Width="491.65">
+        Height="125" Width="491.65">
 
     <DockPanel Margin="0">
         <StackPanel x:Name="InternetRadio" Margin="0" DockPanel.Dock="Top">
@@ -53,10 +53,21 @@
                 <ComboBox Height="30" HorizontalAlignment="Left" x:Name="senderListe" VerticalAlignment="Top" Width="214" SelectionChanged="senderListe_SelectionChanged" FontSize="16" Margin="0,0,5,0" />
                 <Button Content="Play" HorizontalAlignment="Left" x:Name="play" Width="38" Click="play_Click" Height="30" VerticalAlignment="Top" Margin="0,0,5,0" />
                 <Button Content="Stop" Height="30" HorizontalAlignment="Left" x:Name="stop" VerticalAlignment="Top" Width="41" Click="stop_Click" Margin="0,0,5,0" />
-                <Image Height="26" HorizontalAlignment="Left" x:Name="image1" Stretch="None" VerticalAlignment="Top" Width="26" Source="/Resources/sound_zero_icon24.png" Margin="0" />
+                <Image x:Name="___Resources_sound_zero_icon24_png" Source="/Resources/sound_zero_icon24.png" Stretch="Fill" RenderTransformOrigin="0.465,0.508" Width="24"/>
                 <Slider x:Name="slider1" ValueChanged="slider1_ValueChanged" HorizontalAlignment="Left" Width="91" Height="23" VerticalAlignment="Top" Maximum="1" LargeChange="0.2" Value="0.8" Margin="0,4,5,0" />
-                <Image Height="26" HorizontalAlignment="Left" x:Name="image2" Source="/Resources/sound_high_icon24.png" Stretch="None" VerticalAlignment="Top" Width="26" Margin="0,0,5,0" />
+                <Image x:Name="___Resources_sound_high_icon24_png" Source="/Resources/sound_high_icon24.png" Stretch="Fill" Width="24"/>
             </DockPanel>
+            <Grid HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label x:Name="label" Content="Aktuell:" Margin="0,0,0,0"/>
+                <Label x:Name="stateLabel" Content="Stopped" Grid.Column="1"/>
+            </Grid>
         </StackPanel>
     </DockPanel>
 </Window>

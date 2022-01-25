@@ -64,6 +64,7 @@ namespace InternetRadio
             _player.UnloadedBehavior = MediaState.Manual;
             _player.ScriptCommand += new EventHandler<MediaScriptCommandRoutedEventArgs>(RaiseSongChanged);
             _player.MediaFailed += MediaFailed;
+            _player.MediaEnded += MediaEnded;
         }
  
         public void SetSource(int index, string uri)
@@ -146,6 +147,15 @@ namespace InternetRadio
             RaiseStateChanged();
         }
 
+        private void MediaEnded(object sender, RoutedEventArgs eArgs)
+        {
+            State = PlayerState.Ended;
+            _player.Source = null;
+            //InitNewPlayer();
+            Console.WriteLine(eArgs.RoutedEvent.ToString());
+            RaiseStateChanged();
+        }
+
         protected virtual void RaiseSongChanged(object Sender, MediaScriptCommandRoutedEventArgs eArgs)
         {
 
@@ -168,7 +178,8 @@ namespace InternetRadio
         Stopped,
         Paused,
         Playing,
-        Failed
+        Failed,
+        Ended
     }
 
     public class SongEventArgs : EventArgs

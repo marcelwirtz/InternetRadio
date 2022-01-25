@@ -1,20 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using Microsoft.Win32;
-using System.IO;
-using System.Text.RegularExpressions;
 using System.Data;
-using System.Data.Sql;
 using System.Timers;
 using System.Windows.Threading;
 
@@ -59,7 +46,7 @@ namespace InternetRadio
 
         void _radio_Changed(object sender, EventArgs e)
         {
-            Update();
+            Update();            
             if (_radio.State == PlayerState.Failed) reconnectTimer.Enabled = true;
             else reconnectTimer.Enabled = false;
         }
@@ -82,6 +69,12 @@ namespace InternetRadio
 
         private void Update()
         {
+            this.Dispatcher.Invoke(new Action(() =>
+            {
+                if(stateLabel != null)
+                    stateLabel.Content = _radio.State;
+            }));
+
             slider1.Value = _radio.Volume;
 
             senderListe.ItemsSource = _radio.Playlist;
