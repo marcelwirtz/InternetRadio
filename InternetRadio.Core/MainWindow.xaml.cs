@@ -47,7 +47,7 @@ namespace InternetRadio
         void _radio_Changed(object sender, EventArgs e)
         {
             Update();            
-            if (_radio.State == PlayerState.Failed) reconnectTimer.Enabled = true;
+            if (_radio.State == PlayerState.Failed || _radio.State == PlayerState.Ended) reconnectTimer.Enabled = true;
             else reconnectTimer.Enabled = false;
         }
 
