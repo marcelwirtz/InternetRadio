@@ -97,6 +97,7 @@ namespace InternetRadio
             switch (_radio.State)
             {
                 case PlayerState.Stopped:
+                case PlayerState.Ended:
                     play.IsEnabled = true;
                     play.Content = "Play";
                     break;
